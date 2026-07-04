@@ -165,4 +165,20 @@ small {
   margin: 0;
   color: #555;
   line-height: 1.6;
+}/* ===== TÉRKÉP ===== */
+
+.map-section {
+  margin-top: 50px;
+}
+
+.map-section h2 {
+  margin-bottom: 20px;
+  color: #23272e;
+}
+
+#map {
+  height: 600px;
+  border-radius: 12px;
+  border: 1px solid #d9dee5;
+  background: #eef2f5;
 }

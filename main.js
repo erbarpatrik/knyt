@@ -1,3 +1,7 @@
+import './style.css';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
 import './style.css'
 
 document.querySelector('#app').innerHTML = `
@@ -74,6 +78,14 @@ document.querySelector('#app').innerHTML = `
   </article>
 
 </section>
+
+<section class="map-section">
+
+  <h2>Nyestészlelési térkép</h2>
+
+  <div id="map"></div>
+
+</section>
 </main>
 `
 const countdown = document.getElementById("countdown");
@@ -104,3 +116,8 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+const map = L.map('map').setView([47.1625, 19.5033], 7);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap közreműködők'
+}).addTo(map);
