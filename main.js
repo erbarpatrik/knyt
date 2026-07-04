@@ -116,8 +116,16 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
-const map = L.map('map').setView([47.1625, 19.5033], 7);
-
+console.log("A térkép inicializálása...");
+const map = L.map('map').setView([46.0727, 18.2323], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap közreműködők'
 }).addTo(map);
+const marker = L.marker([46.0727, 18.2323]).addTo(map);
+
+marker.bindPopup(`
+  <strong>KNYT-2026-000001</strong><br>
+  📍 Pécs, Megyeri út<br>
+  📅 2026.07.04. 14:30<br>
+  🟡 Hatósági ellenőrzés alatt
+`);

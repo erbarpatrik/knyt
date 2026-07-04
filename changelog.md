@@ -6,6 +6,8 @@
 - Frissített index.html
 - Saját favicon
 - Frissített style.css
+- Logo png hiba javítása
+- Logo létrehozása átlátszó háttéren
 
 ## v0.1.0
 - Első publikus verzió

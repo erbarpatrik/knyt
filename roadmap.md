@@ -19,8 +19,7 @@ Határidő: 2026.08.01.
 
 💡 Ötletek
 
-- SVG logó
-- PNG javítása
+
 - Nyestriasztási szintek
 - Interaktív térkép
 - Admin felület
@@ -37,7 +36,7 @@ Központi Nyestészlelési Térkép
 
 🐞 Hibák
 
-- PNG sakktáblás háttér
+
 
 ═══════════════════════════
 📝 Megjegyzések
