@@ -56,7 +56,7 @@ document.querySelector('#app').innerHTML = `
 
   <div id="countdown"></div>
 
-  <small>KNYT v0.3.1</small>
+  <small>KNYT v0.3.2</small>
 
 </div>
 
@@ -127,7 +127,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 console.log("A térkép inicializálása...");
-const map = L.map('map').setView([46.0727, 18.2323], 13);
+const map = L.map('map').setView([47.1625, 19.5033], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap közreműködők'
 }).addTo(map);
