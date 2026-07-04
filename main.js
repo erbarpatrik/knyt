@@ -131,11 +131,40 @@ const map = L.map('map').setView([46.0727, 18.2323], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap közreműködők'
 }).addTo(map);
-const marker = L.marker([46.0727, 18.2323]).addTo(map);
+const reports = [
+  {
+    id: "KNYT-2026-000001",
+    city: "Pécs",
+    street: "Megyeri út",
+    lat: 46.0727,
+    lng: 18.2323,
+    date: "2026.07.04. 14:30",
+    status: "Hatósági ellenőrzés alatt",
+    color: "yellow",
+    description: "Padlástérből kaparás hallható."
+  },{
+    id: "KNYT-2026-000002",
+    city: "Siklós",
+    street: "Kossuth utca",
+    lat: 45.854,
+    lng: 18.297,
+    date: "2026.07.05. 09:15",
+    status: "NNH által megerősített",
+    color:"green",
+    description: "Nyestet észleltek a tetőtérben."
+  }
+];
 
-marker.bindPopup(`
-  <strong>KNYT-2026-000001</strong><br>
-  📍 Pécs, Megyeri út<br>
-  📅 2026.07.04. 14:30<br>
-  🟡 Hatósági ellenőrzés alatt
-`);
+reports.forEach(report => {
+
+  const marker = L.marker([report.lat, report.lng]).addTo(map);
+
+  marker.bindPopup(`
+    <strong>${report.id}</strong><br>
+    📍 ${report.city}, ${report.street}<br>
+    📅 ${report.date}<br>
+    ${report.color === "green" ? "🟢" : "🟡"} ${report.status}
+    📝 ${report.description}
+  `);
+
+});
