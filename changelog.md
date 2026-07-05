@@ -2,6 +2,11 @@
 
 
 ---
+## v0.3.3 Hibajavítások, domain bekötés
+- Mobil felület javítása
+- nyestterkep.hu beköktése az oldalhoz
+- Megszűnt a vizszintes görgetés mobilnézet esetébengit add .
+---
 # v0.3.2 – Állapotkezelés
 
 - Bejelentésenkénti státusz támogatása
