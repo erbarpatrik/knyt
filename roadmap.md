@@ -6,6 +6,38 @@ KNYT - FEJLESZTÉSI TERV
 
 ☐ Első nyilvános verzió
 Határidő: 2026.08.01.
+==================================
+## v0.3.3
+- nyestterkep.hu bekötése 
+- Fejléc mobilbaráttá alakítása
+
+
+## v0.4.0
+- Egyedi NNH marker ikonok (🟡 / 🟢)
+
+## v0.4.1
+- Popup megjelenésének átdolgozása
+- Hivatalos KNYT adatlap stílus
+
+## v0.4.2
+- Bejelentések szűrése státusz alapján
+
+## v0.4.3
+- Település alapú keresés
+
+## v0.5.0
+- Bejelentő űrlap
+
+## v0.6.0
+- Adatbázis integráció
+
+## v0.7.0
+- NNH adminisztrációs felület
+- Moderálás
+- Bejelentések kezelése
+
+
+
 
 💡 Ötletek
 
@@ -22,7 +54,7 @@ Határidő: 2026.08.01.
 
 🐞 Hibák
 
-
+Fejléc mobilnézet esetén nem megfelelően van pozicionálva
 
 ═══════════════════════════
 📝 Megjegyzések

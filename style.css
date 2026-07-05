@@ -181,4 +181,10 @@ small {
   border-radius: 12px;
   border: 1px solid #d9dee5;
   background: #eef2f5;
+}/* ===== MOBIL ===== */
+
+@media (max-width: 768px) {
+
+}.services {
+  grid-template-columns: 1fr;
 }
