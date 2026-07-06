@@ -56,7 +56,7 @@ document.querySelector('#app').innerHTML = `
 
   <div id="countdown"></div>
 
-  <small>KNYT v0.3.2</small>
+  <small>KNYT v0.3.3</small>
 
 </div>
 
@@ -131,6 +131,62 @@ const map = L.map('map').setView([47.1625, 19.5033], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap közreműködők'
 }).addTo(map);
+
+const STATUS = {
+  pending: {
+    text: "Hatósági ellenőrzés alatt",
+    color: "#FBC02D",
+    emoji: "🟡"
+  },
+  verified: {
+    text: "NNH által megerősített",
+    color: "#43A047",
+    emoji: "🟢"
+  },
+  rejected: {
+    text: "Elutasított",
+    color: "#E53935",
+    emoji: "🔴"
+  },
+  archived: {
+    text: "Archív",
+    color: "#757575",
+    emoji: "⚫"
+  }
+};
+const MARKER_ICONS = {
+  pending: L.icon({
+    iconUrl: 'markers/marker-yellow.svg',
+    iconSize: [40, 52],
+    iconAnchor: [20, 52],
+    popupAnchor: [0, -48]
+  }),
+
+  verified: L.icon({
+    iconUrl: 'markers/marker-green.svg',
+    iconSize: [40, 52],
+    iconAnchor: [20, 52],
+    popupAnchor: [0, -48]
+  }),
+
+  rejected: L.icon({
+    iconUrl: 'markers/marker-red.svg',
+    iconSize: [40, 52],
+    iconAnchor: [20, 52],
+    popupAnchor: [0, -48]
+  }),
+
+  archived: L.icon({
+    iconUrl: 'markers/marker-gray.svg',
+    iconSize: [40, 52],
+    iconAnchor: [20, 52],
+    popupAnchor: [0, -48]
+  })
+};
+
+function getMarkerIcon(status) {
+  return MARKER_ICONS[status] || MARKER_ICONS.pending;
+}
 const reports = [
   {
     id: "KNYT-2026-000001",
@@ -139,8 +195,7 @@ const reports = [
     lat: 46.0727,
     lng: 18.2323,
     date: "2026.07.04. 14:30",
-    status: "Hatósági ellenőrzés alatt",
-    color: "yellow",
+    status: "pending",
     description: "Padlástérből kaparás hallható."
   },{
     id: "KNYT-2026-000002",
@@ -149,22 +204,24 @@ const reports = [
     lat: 45.854,
     lng: 18.297,
     date: "2026.07.05. 09:15",
-    status: "NNH által megerősített",
-    color:"green",
+    status: "verified",
     description: "Nyestet észleltek a tetőtérben."
   }
 ];
 
 reports.forEach(report => {
+  const status = STATUS[report.status];
 
-  const marker = L.marker([report.lat, report.lng]).addTo(map);
+  const marker = L.marker(
+    [report.lat, report.lng],
+    { icon: getMarkerIcon(report.status) }
+  ).addTo(map);
 
   marker.bindPopup(`
-    <strong>${report.id}</strong><br>
-    📍 ${report.city}, ${report.street}<br>
-    📅 ${report.date}<br>
-    ${report.color === "green" ? "🟢" : "🟡"} ${report.status}
-    📝 ${report.description}
+ <strong>${report.id}</strong><br>
+📍 ${report.city}, ${report.street}<br>
+📅 ${report.date}<br>
+${status.emoji} ${status.text}<br>
+📝 ${report.description}
   `);
-
 });

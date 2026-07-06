@@ -7,10 +7,6 @@ KNYT - FEJLESZTÉSI TERV
 ☐ Első nyilvános verzió
 Határidő: 2026.08.01.
 ==================================
-## v0.3.3
-- nyestterkep.hu bekötése 
-- Fejléc mobilbaráttá alakítása
-
 
 ## v0.4.0
 - Egyedi NNH marker ikonok (🟡 / 🟢)
