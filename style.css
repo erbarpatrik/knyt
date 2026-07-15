@@ -188,3 +188,53 @@ small {
 }.services {
   grid-template-columns: 1fr;
 }
+.map-wrapper{
+  position: relative;
+  overflow: hidden;
+}
+
+
+.report-panel{
+  position: absolute;
+  top: 0;
+  right: -340px;
+
+  width: 340px;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  background: #fff;
+
+  box-shadow: -4px 0 15px rgba(0,0,0,.15);
+
+  padding: 20px;
+
+  transition: right .3s ease;
+
+  z-index: 1000;
+
+  overflow: auto;
+}
+
+
+.report-panel.open{
+
+  right:0;
+}
+
+#selected-location{
+
+  margin:20px 0;
+
+  padding:12px;
+
+  background:#f4f4f4;
+
+  border-radius:8px;
+}
+
+#close-panel{
+
+  width:100%;
+}

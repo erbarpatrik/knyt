@@ -93,7 +93,27 @@ document.querySelector('#app').innerHTML = `
 
   <h2>Nyestészlelési térkép</h2>
 
-  <div id="map"></div>
+  <div class="map-wrapper">
+
+    <div id="map"></div>
+
+    <aside id="report-panel" class="report-panel">
+
+      <h3>📝 Új bejelentés</h3>
+
+      <p>Kattints a térképre egy hely kijelöléséhez.</p>
+
+      <div id="selected-location">
+        Nincs kijelölt hely.
+      </div>
+
+      <button id="close-panel">
+        Bezárás
+      </button>
+
+    </aside>
+
+  </div>
 
 </section>
 </main>
@@ -224,4 +244,25 @@ reports.forEach(report => {
 ${status.emoji} ${status.text}<br>
 📝 ${report.description}
   `);
+});
+// Ideiglenes bejelentési marker
+let temporaryMarker = null;
+
+map.on("click", (e) => {
+
+  const { lat, lng } = e.latlng;
+
+  console.log("Új bejelentés:", lat, lng);
+
+  if (temporaryMarker) {
+    map.removeLayer(temporaryMarker);
+  }
+
+  temporaryMarker = L.marker([lat, lng]).addTo(map);
+
+  temporaryMarker.bindPopup(`
+    <strong>Új bejelentés helye</strong><br>
+    📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}
+  `).openPopup();
+
 });

@@ -1,11 +1,17 @@
 # KNYT Changelog
 
 
+
+---
+# v0.4.0
+- Egyedi NNH marker ikonok státusznak megfelőlen
+- Státusz riport létrehozva 
+- Marker státusz automatizálva
 ---
 ## v0.3.3 Hibajavítások, domain bekötés
 - Mobil felület javítása
 - nyestterkep.hu beköktése az oldalhoz
-- Megszűnt a vizszintes görgetés mobilnézet esetébengit add .
+- Megszűnt a vizszintes görgetés mobilnézet esetében
 ---
 # v0.3.2 – Állapotkezelés
 
