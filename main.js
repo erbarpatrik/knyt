@@ -1,3 +1,4 @@
+import reports from "./reports";
 import './style.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -93,7 +94,25 @@ document.querySelector('#app').innerHTML = `
 
   <h2>Nyestészlelési térkép</h2>
 
-  <div class="map-wrapper">
+  <div class="workspace">
+
+    <div id="map"></div>
+
+    <aside id="report-panel">
+
+      <h3>📝 Új bejelentés</h3>
+
+      <p>Kattints a térképre a hely kijelöléséhez.</p>
+
+      <div id="selected-location">
+        Nincs kijelölt hely.
+      </div>
+
+    </aside>
+
+  </div>
+
+</section>
 
     <div id="map"></div>
 
@@ -207,28 +226,6 @@ const MARKER_ICONS = {
 function getMarkerIcon(status) {
   return MARKER_ICONS[status] || MARKER_ICONS.pending;
 }
-const reports = [
-  {
-    id: "KNYT-2026-000001",
-    city: "Pécs",
-    street: "Megyeri út",
-    lat: 46.0727,
-    lng: 18.2323,
-    date: "2026.07.04. 14:30",
-    status: "pending",
-    description: "Padlástérből kaparás hallható."
-  },{
-    id: "KNYT-2026-000002",
-    city: "Siklós",
-    street: "Kossuth utca",
-    lat: 45.854,
-    lng: 18.297,
-    date: "2026.07.05. 09:15",
-    status: "verified",
-    description: "Nyestet észleltek a tetőtérben."
-  }
-];
-
 reports.forEach(report => {
   const status = STATUS[report.status];
 
@@ -247,12 +244,12 @@ ${status.emoji} ${status.text}<br>
 });
 // Ideiglenes bejelentési marker
 let temporaryMarker = null;
+const reportPanel = document.getElementById("report-panel");
+const selectedLocation = document.getElementById("selected-location");
 
 map.on("click", (e) => {
 
   const { lat, lng } = e.latlng;
-
-  console.log("Új bejelentés:", lat, lng);
 
   if (temporaryMarker) {
     map.removeLayer(temporaryMarker);
@@ -260,9 +257,15 @@ map.on("click", (e) => {
 
   temporaryMarker = L.marker([lat, lng]).addTo(map);
 
-  temporaryMarker.bindPopup(`
-    <strong>Új bejelentés helye</strong><br>
-    📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}
-  `).openPopup();
+  reportPanel.classList.add("open");
+
+  selectedLocation.innerHTML = `
+    <strong>Koordináták</strong><br>
+    ${lat.toFixed(6)}, ${lng.toFixed(6)}
+  `;
+
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 320);
 
 });
