@@ -1,4 +1,8 @@
+
 import reports from "./reports";
+import createUI from "./ui";
+
+
 import './style.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -15,128 +19,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-document.querySelector('#app').innerHTML = `
-<header class="top-header">
+createUI();
 
-  <div class="logo-area">
-
-    <img
-      src="/nnh-logo.png"
-      alt="NNH logó"
-      class="logo"
-    >
-
-    <div>
-
-      <h1>NNH</h1>
-
-      <p class="system">
-        Központi Nyestészlelési Térkép
-      </p>
-
-    </div>
-
-  </div>
-
-</header>
-
-<main class="container">
-
-<section class="hero">
-
-<div class="status-card">
-
-  <p class="status-title">
-    Rendszer állapota
-  </p>
-
-  <div class="status">
-    <span class="status-dot"></span>
-    <span>Fejlesztés alatt</span>
-  </div>
-
-  <div id="countdown"></div>
-
-  <small>KNYT v0.3.3</small>
-
-</div>
-
-</section>
-<section class="services">
-
-  <article class="service-card">
-    <h3>🗺️ Nyestészlelési térkép</h3>
-
-    <p>
-      Országos nyestészlelések megtekintése.
-    </p>
-  </article>
-
-  <article class="service-card">
-    <h3>📝 Bejelentés</h3>
-
-    <p>
-      Új nyestészlelés vagy káresemény bejelentése.
-    </p>
-  </article>
-
-  <article class="service-card">
-    <h3>📢 NNH közlemények</h3>
-
-    <p>
-      Hivatalos közlemények és tájékoztatások.
-    </p>
-  </article>
-
-</section>
-
-<section class="map-section">
-
-  <h2>Nyestészlelési térkép</h2>
-
-  <div class="workspace">
-
-    <div id="map"></div>
-
-    <aside id="report-panel">
-
-      <h3>📝 Új bejelentés</h3>
-
-      <p>Kattints a térképre a hely kijelöléséhez.</p>
-
-      <div id="selected-location">
-        Nincs kijelölt hely.
-      </div>
-
-    </aside>
-
-  </div>
-
-</section>
-
-    <div id="map"></div>
-
-    <aside id="report-panel" class="report-panel">
-
-      <h3>📝 Új bejelentés</h3>
-
-      <p>Kattints a térképre egy hely kijelöléséhez.</p>
-
-      <div id="selected-location">
-        Nincs kijelölt hely.
-      </div>
-
-      <button id="close-panel">
-        Bezárás
-      </button>
-
-    </aside>
-
-  </div>
-
-</section>
-</main>
-`
 const countdown = document.getElementById("countdown");
 
 // KNYT indulása
@@ -246,7 +130,8 @@ ${status.emoji} ${status.text}<br>
 let temporaryMarker = null;
 const reportPanel = document.getElementById("report-panel");
 const selectedLocation = document.getElementById("selected-location");
-
+const reportDate = document.getElementById("report-date");
+const reportTime = document.getElementById("report-time");
 map.on("click", (e) => {
 
   const { lat, lng } = e.latlng;
@@ -263,7 +148,10 @@ map.on("click", (e) => {
     <strong>Koordináták</strong><br>
     ${lat.toFixed(6)}, ${lng.toFixed(6)}
   `;
+  const now = new Date();
 
+  reportDate.value = now.toISOString().split("T")[0];
+  reportTime.value = now.toTimeString().slice(0, 5);
   setTimeout(() => {
     map.invalidateSize();
   }, 320);

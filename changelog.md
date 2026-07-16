@@ -1,6 +1,20 @@
 # KNYT Changelog
 
+## v0.5.0 Beta (2026.07.17.)
 
+- Elkészült a bejelentő panel.
+- Térképre kattintással kijelölhető a bejelentés helye.
+- Automatikus dátum- és időkitöltés.
+- Új bejelentési kategóriák.
+- Megjegyzés mező hozzáadása.
+
+
+- A HTML külön `ui.js` fájlba került.
+- A mintaadatok külön `reports.js` fájlba kerültek.
+- Előkészítés a `map.js` modulhoz.
+
+- A panel megnyitásának és a térkép átméretezésének javítása.
+- Több kisebb JavaScript hiba javítása.
 
 ---
 # v0.4.0

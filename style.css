@@ -242,3 +242,51 @@ small {
 
   border-radius:8px;
 }
+#report-panel label{
+  display:block;
+  margin-top:16px;
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+#report-panel input,
+#report-panel textarea{
+
+  width:100%;
+  box-sizing:border-box;
+
+  padding:10px;
+
+  border:1px solid #d9dee5;
+
+  border-radius:8px;
+
+  font:inherit;
+}
+
+.report-types{
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+
+  margin-top:10px;
+}
+
+.report-types label{
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-weight:400;
+
+  margin:0;
+}
+
+#submit-report{
+
+  width:100%;
+
+  margin-top:24px;
+}
