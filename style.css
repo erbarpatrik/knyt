@@ -290,3 +290,14 @@ small {
 
   margin-top:24px;
 }
+.beta-notice {
+  margin: 12px 0 18px;
+  padding: 12px;
+  background: #fff8e1;
+  border: 1px solid #f5c842;
+  border-left: 4px solid #f0b400;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #5d4300;
+}

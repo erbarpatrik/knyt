@@ -41,7 +41,7 @@ document.querySelector('#app').innerHTML = `
 
   <div id="countdown"></div>
 
-  <small>KNYT v0.5.0 Beta</small>
+  <small>KNYT v0.5.2 Beta</small>
 
 </div>
 
@@ -87,6 +87,10 @@ document.querySelector('#app').innerHTML = `
     <form id="report-form">
 
       <h3>📝 Új bejelentés</h3>
+      <div class="beta-notice">
+  <strong>🧪 Béta verzió</strong><br>
+  A bejelentési funkció jelenleg tesztelés alatt áll. A beküldött bejelentések egyelőre csak az Ön böngészőjében jelennek meg, és az oldal frissítése után elvesznek.
+</div>
 
       <p>Kattints a térképre a hely kijelöléséhez.</p>
 
