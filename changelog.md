@@ -1,6 +1,15 @@
 # KNYT Changelog
 
-## v0.5.2
+## v0.5.3 Beta
+
+
+- OpenStreetMap Nominatim reverse geokódolás integrálása
+- Automatikus címfelismerés térképkattintáskor
+- Felismert cím megjelenítése a bejelentőpanelen
+- A térképkattintás kezelése `async/await` alapokra került
+- Geokódolási hibakezelés javítása
+
+## v0.5.2 Beta
 
 - Új bejelentések létrehozása a térképen
 - Egységes addReportMarker() függvény
@@ -8,8 +17,6 @@
 - Bejelentő panel automatikus bezárása
 - Űrlap alaphelyzetbe állítása beküldés után
 - Béta verzióra figyelmezető blokk bejelentéskor
-
-
 - Moduláris markerkezelés
 - Egyszeres submit eseménykezelő
 
