@@ -41,7 +41,7 @@ document.querySelector('#app').innerHTML = `
 
   <div id="countdown"></div>
 
-  <small>KNYT v0.5.3 Beta</small>
+  <small>KNYT v0.5.4 Beta</small>
 
 </div>
 
@@ -171,6 +171,11 @@ document.querySelector('#app').innerHTML = `
 
 </section>
 </main>
+
+</section>
+</main>
+
+<div id="toast" class="toast"></div>
 
 `;
 

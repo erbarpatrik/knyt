@@ -318,3 +318,60 @@ small {
 .address-box p {
   margin: 4px 0;
 }
+
+.submit-message {
+  display: none;
+
+  margin-top: 16px;
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: #e8f5e9;
+  border: 1px solid #4caf50;
+
+  color: #2e7d32;
+  font-weight: 600;
+  text-align: center;
+}
+
+.submit-message.show {
+  display: block;
+}
+.toast {
+  position: fixed;
+
+  top: 20px;
+  right: 20px;
+
+  min-width: 320px;
+  max-width: 420px;
+
+  padding: 14px 18px;
+
+  background: #2e7d32;
+  color: white;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+  line-height: 1.4;
+
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+
+  opacity: 0;
+  transform: translateY(-20px);
+
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -101,6 +101,21 @@ const reportDate = document.getElementById("report-date");
 const reportTime = document.getElementById("report-time");
 const reportForm = document.getElementById("report-form");
 const reportNote = document.getElementById("report-note");
+
+const toast = document.getElementById("toast");
+
+function showToast(message) {
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000);
+}
+
 map.on("click", async (e) => {
 const { lat, lng } = e.latlng;
 console.log("Kattintás", lat, lng);
@@ -207,6 +222,8 @@ reportForm.addEventListener("submit", (e) => {
 
   addReportMarker(report);
 
+  showToast(`✅ A bejelentés sikeresen rögzítve (${report.id})`);
+
   if (temporaryMarker) {
     map.removeLayer(temporaryMarker);
     temporaryMarker = null;
@@ -225,6 +242,17 @@ reportForm.addEventListener("submit", (e) => {
   document.querySelector('input[name="report-type"]').checked = true;
 
   reportPanel.classList.remove("open");
+
+  const submitMessage = document.getElementById("submit-message");
+
+submitMessage.textContent =
+  `✅ A bejelentés sikeresen rögzítésre került. Azonosító: ${report.id}`;
+
+submitMessage.classList.add("show");
+
+setTimeout(() => {
+  submitMessage.classList.remove("show");
+}, 4000);
 
   console.log(report);
 });
