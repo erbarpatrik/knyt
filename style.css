@@ -301,3 +301,20 @@ small {
   line-height: 1.5;
   color: #5d4300;
 }
+.address-box {
+  margin: 12px 0 18px;
+  padding: 12px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.address-box strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.address-box p {
+  margin: 4px 0;
+}

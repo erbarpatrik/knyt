@@ -93,17 +93,51 @@ const reportTime = document.getElementById("report-time");
 const reportForm = document.getElementById("report-form");
 const reportNote = document.getElementById("report-note");
 map.on("click", async (e) => {
-
-  const { lat, lng } = e.latlng;
-  console.log("Kattintás", lat, lng);
-  selectedLat = lat;
-selectedLng = lng;
-
+const { lat, lng } = e.latlng;
+console.log("Kattintás", lat, lng);
+selectedLat = lat; selectedLng = lng; 
 console.log("Geokódolás indul");
-
 try {
+  console.log("Geokódolás indul");
+
   const address = await getAddress(lat, lng);
   console.log(address);
+
+  const addr = address.address || {};
+
+  const city =
+    addr.city ||
+    addr.town ||
+    addr.village ||
+    addr.hamlet ||
+    "";
+
+  const street = addr.road || "";
+  const houseNumber = addr.house_number || "";
+  const postcode = addr.postcode || "";
+  const county = addr.county || "";
+
+  console.log({
+
+    city,
+    street,
+    houseNumber,
+    postcode,
+    county,
+  });
+
+  document.getElementById("address-city").textContent =
+  `Település: ${city || "-"}`;
+
+document.getElementById("address-street").textContent =
+  `Utca: ${street}${houseNumber ? " " + houseNumber : ""}`;
+
+document.getElementById("address-postcode").textContent =
+  `Irányítószám: ${postcode || "-"}`;
+
+document.getElementById("address-county").textContent =
+  `Vármegye: ${county || "-"}`;
+
 } catch (error) {
   console.error(error);
 }

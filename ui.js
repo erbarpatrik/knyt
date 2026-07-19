@@ -98,6 +98,17 @@ document.querySelector('#app').innerHTML = `
         Nincs kijelölt hely.
       </div>
 
+      <div id="selected-address" class="address-box">
+
+  <strong>📍 Cím</strong>
+
+  <p id="address-city">Település: -</p>
+  <p id="address-street">Utca: -</p>
+  <p id="address-postcode">Irányítószám: -</p>
+  <p id="address-county">Vármegye: -</p>
+
+</div>
+
       <label for="report-date">📅 Dátum</label>
       <input type="date" id="report-date">
 
