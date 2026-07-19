@@ -63,7 +63,7 @@ const MARKER_ICONS = {
 function getMarkerIcon(status) {
   return MARKER_ICONS[status] || MARKER_ICONS.pending;
 }
-reports.forEach(report => {
+function addReportMarker(report) {
   const status = STATUS[report.status];
 
   const marker = L.marker(
@@ -72,22 +72,65 @@ reports.forEach(report => {
   ).addTo(map);
 
   marker.bindPopup(`
- <strong>${report.id}</strong><br>
-📍 ${report.city}, ${report.street}<br>
-📅 ${report.date}<br>
-${status.emoji} ${status.text}<br>
-📝 ${report.description}
+    <strong>${report.id}</strong><br>
+    📍 ${report.city ?? "-"}, ${report.street ?? "-"}<br>
+    📅 ${report.date}<br>
+    ${status.emoji} ${status.text}<br>
+    📝 ${report.description ?? report.note}
   `);
-});
+}
+reports.forEach(addReportMarker);
+
 // Ideiglenes bejelentési marker
 let temporaryMarker = null;
+let selectedLat = null;
+let selectedLng = null;
 const reportPanel = document.getElementById("report-panel");
 const selectedLocation = document.getElementById("selected-location");
 const reportDate = document.getElementById("report-date");
 const reportTime = document.getElementById("report-time");
+const reportForm = document.getElementById("report-form");
+const reportNote = document.getElementById("report-note");
 map.on("click", (e) => {
+  reportForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+  
+    console.log("Bejelentés beküldése");
+  
+    const report = {
+      id: `KNYT-${Date.now()}`,
+      lat: selectedLat,
+      lng: selectedLng,
+      date: reportDate.value,
+      time: reportTime.value,
+      type: document.querySelector('input[name="report-type"]:checked').value,
+      note: reportNote.value,
+      status: "pending"
+    };
+    
+    reports.push(report);
+
+addReportMarker(report);
+if (temporaryMarker) {
+  map.removeLayer(temporaryMarker);
+  temporaryMarker = null;
+}
+selectedLat = null;
+
+selectedLng = null;
+
+reportNote.value = "";
+
+document.querySelector('input[name="report-type"]').checked = true;
+
+reportPanel.classList.remove("open");
+
+console.log(report);
+  });
 
   const { lat, lng } = e.latlng;
+  selectedLat = lat;
+selectedLng = lng;
 
   if (temporaryMarker) {
     map.removeLayer(temporaryMarker);

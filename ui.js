@@ -84,6 +84,8 @@ document.querySelector('#app').innerHTML = `
 
     <aside id="report-panel">
 
+    <form id="report-form">
+
       <h3>📝 Új bejelentés</h3>
 
       <p>Kattints a térképre a hely kijelöléséhez.</p>
@@ -142,9 +144,11 @@ document.querySelector('#app').innerHTML = `
         placeholder="Írja le röviden az észlelés körülményeit..."
       ></textarea>
 
-      <button id="submit-report">
-        Bejelentés beküldése
-      </button>
+      <button type="submit" id="submit-report">
+  Bejelentés beküldése
+</button>
+
+      </form>
 
     </aside>
 
