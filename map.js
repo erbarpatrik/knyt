@@ -74,8 +74,12 @@ function addReportMarker(report) {
 
   marker.bindPopup(`
     <strong>${report.id}</strong><br>
-    📍 ${report.city ?? "-"}, ${report.street ?? "-"}<br>
-    📅 ${report.date}<br>
+
+    📍 ${report.city ?? "-"}<br>
+    ${report.postcode ?? "-"} ${report.street ?? "-"}${report.houseNumber ? " " + report.houseNumber : ""}<br>
+    ${report.county ?? "-"}<br><br>
+
+    📅 ${report.date} ${report.time}<br>
     ${status.emoji} ${status.text}<br>
     📝 ${report.description ?? report.note}
   `);
@@ -86,6 +90,11 @@ reports.forEach(addReportMarker);
 let temporaryMarker = null;
 let selectedLat = null;
 let selectedLng = null;
+let selectedCity = "";
+let selectedStreet = "";
+let selectedHouseNumber = "";
+let selectedPostcode = "";
+let selectedCounty = "";
 const reportPanel = document.getElementById("report-panel");
 const selectedLocation = document.getElementById("selected-location");
 const reportDate = document.getElementById("report-date");
@@ -116,6 +125,12 @@ try {
   const houseNumber = addr.house_number || "";
   const postcode = addr.postcode || "";
   const county = addr.county || "";
+
+  selectedCity = city;
+selectedStreet = street;
+selectedHouseNumber = houseNumber;
+selectedPostcode = postcode;
+selectedCounty = county;
 
   console.log({
 
@@ -170,15 +185,24 @@ reportForm.addEventListener("submit", (e) => {
 
   const report = {
     id: `KNYT-${Date.now()}`,
+  
     lat: selectedLat,
     lng: selectedLng,
+  
+    city: selectedCity,
+    street: selectedStreet,
+    houseNumber: selectedHouseNumber,
+    postcode: selectedPostcode,
+    county: selectedCounty,
+  
     date: reportDate.value,
     time: reportTime.value,
+  
     type: document.querySelector('input[name="report-type"]:checked').value,
     note: reportNote.value,
+  
     status: "pending"
   };
-
   reports.push(report);
 
   addReportMarker(report);
@@ -190,6 +214,11 @@ reportForm.addEventListener("submit", (e) => {
 
   selectedLat = null;
   selectedLng = null;
+  selectedCity = "";
+  selectedStreet = "";
+  selectedHouseNumber = "";
+  selectedPostcode = "";
+  selectedCounty = "";
 
   reportNote.value = "";
 
@@ -199,5 +228,6 @@ reportForm.addEventListener("submit", (e) => {
 
   console.log(report);
 });
+
 return map;
 }
