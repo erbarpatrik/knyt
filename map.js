@@ -1,5 +1,6 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { getAddress } from "./geocoding.js";
 export default function initMap(reports) {
 
 console.log("A térkép inicializálása...");
@@ -91,46 +92,21 @@ const reportDate = document.getElementById("report-date");
 const reportTime = document.getElementById("report-time");
 const reportForm = document.getElementById("report-form");
 const reportNote = document.getElementById("report-note");
-map.on("click", (e) => {
-  reportForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-  
-    console.log("Bejelentés beküldése");
-  
-    const report = {
-      id: `KNYT-${Date.now()}`,
-      lat: selectedLat,
-      lng: selectedLng,
-      date: reportDate.value,
-      time: reportTime.value,
-      type: document.querySelector('input[name="report-type"]:checked').value,
-      note: reportNote.value,
-      status: "pending"
-    };
-    
-    reports.push(report);
-
-addReportMarker(report);
-if (temporaryMarker) {
-  map.removeLayer(temporaryMarker);
-  temporaryMarker = null;
-}
-selectedLat = null;
-
-selectedLng = null;
-
-reportNote.value = "";
-
-document.querySelector('input[name="report-type"]').checked = true;
-
-reportPanel.classList.remove("open");
-
-console.log(report);
-  });
+map.on("click", async (e) => {
 
   const { lat, lng } = e.latlng;
+  console.log("Kattintás", lat, lng);
   selectedLat = lat;
 selectedLng = lng;
+
+console.log("Geokódolás indul");
+
+try {
+  const address = await getAddress(lat, lng);
+  console.log(address);
+} catch (error) {
+  console.error(error);
+}
 
   if (temporaryMarker) {
     map.removeLayer(temporaryMarker);
@@ -152,6 +128,42 @@ selectedLng = lng;
     map.invalidateSize();
   }, 320);
 
+});
+reportForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  console.log("Bejelentés beküldése");
+
+  const report = {
+    id: `KNYT-${Date.now()}`,
+    lat: selectedLat,
+    lng: selectedLng,
+    date: reportDate.value,
+    time: reportTime.value,
+    type: document.querySelector('input[name="report-type"]:checked').value,
+    note: reportNote.value,
+    status: "pending"
+  };
+
+  reports.push(report);
+
+  addReportMarker(report);
+
+  if (temporaryMarker) {
+    map.removeLayer(temporaryMarker);
+    temporaryMarker = null;
+  }
+
+  selectedLat = null;
+  selectedLng = null;
+
+  reportNote.value = "";
+
+  document.querySelector('input[name="report-type"]').checked = true;
+
+  reportPanel.classList.remove("open");
+
+  console.log(report);
 });
 return map;
 }

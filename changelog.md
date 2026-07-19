@@ -1,5 +1,18 @@
 # KNYT Changelog
 
+## v0.5.2
+
+- Új bejelentések létrehozása a térképen
+- Egységes addReportMarker() függvény
+- Ideiglenes marker automatikus törlése
+- Bejelentő panel automatikus bezárása
+- Űrlap alaphelyzetbe állítása beküldés után
+- Béta verzióra figyelmezető blokk bejelentéskor
+
+
+- Moduláris markerkezelés
+- Egyszeres submit eseménykezelő
+
 ## v0.5.0 Beta (2026.07.17.)
 
 - Elkészült a bejelentő panel.
