@@ -1,5 +1,6 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import supabase from './lib/supabase.js';
 import { getAddress } from "./geocoding.js";
 export default function initMap(reports) {
 
@@ -84,7 +85,40 @@ function addReportMarker(report) {
     📝 ${report.description ?? report.note}
   `);
 }
-reports.forEach(addReportMarker);
+
+async function loadReports() {
+  const { data, error } = await supabase
+    .from("reports")
+    .select("*");
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  data.forEach(dbReport => {
+    addReportMarker({
+      id: dbReport.id,
+  
+      lat: dbReport.latitude,
+      lng: dbReport.longitude,
+  
+      city: dbReport.city,
+      street: dbReport.road,
+      houseNumber: dbReport.house_number,
+      postcode: dbReport.postcode,
+      county: dbReport.county,
+  
+      date: dbReport.created_at,
+      time: "",
+  
+      note: dbReport.description,
+      status: dbReport.status
+    });
+  });
+}
+
+loadReports();
 
 // Ideiglenes bejelentési marker
 let temporaryMarker = null;
@@ -193,7 +227,7 @@ document.getElementById("address-county").textContent =
   }, 320);
 
 });
-reportForm.addEventListener("submit", (e) => {
+reportForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   console.log("Bejelentés beküldése");
@@ -218,6 +252,32 @@ reportForm.addEventListener("submit", (e) => {
   
     status: "pending"
   };
+  const { error } = await supabase
+  .from("reports")
+  .insert([
+    {
+      report_type: report.type,
+      status: report.status,
+
+      latitude: report.lat,
+      longitude: report.lng,
+
+      city: report.city,
+      postcode: report.postcode,
+      county: report.county,
+      road: report.street,
+      house_number: report.houseNumber,
+
+      description: report.note
+    }
+  ]);
+
+if (error) {
+  console.error(error);
+  alert("Hiba történt a bejelentés mentése közben.");
+  return;
+}
+
   reports.push(report);
 
   addReportMarker(report);

@@ -1,7 +1,21 @@
 # KNYT Changelog
 
-## v0.5.3 Beta
+## v0.5.5 Beta
 
+- Toast értesítési rendszer bevezetése
+- Sikeres bejelentés visszajelzése lebegő értesítéssel
+- Újrafelhasználható `showToast()` függvény létrehozása
+- Értesítési rendszer előkészítése további funkciókhoz
+
+## v0.5.4 Beta
+
+- Automatikus címfelismerés térképkattintáskor
+- Címadatok megjelenítése a bejelentőpanelen
+- Címadatok mentése a bejelentésekhez
+- Reverse geokódolás integrálása
+- Marker popupok kibővítése részletes címadatokkal
+
+## v0.5.3 Beta
 
 - OpenStreetMap Nominatim reverse geokódolás integrálása
 - Automatikus címfelismerés térképkattintáskor

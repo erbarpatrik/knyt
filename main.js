@@ -1,3 +1,4 @@
+import supabase from './lib/supabase.js'
 import reports from "./reports";
 import createUI from "./ui";
 import initMap from "./map";
@@ -53,3 +54,4 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 initMap(reports);
+console.log('Supabase kapcsolat:', supabase)
