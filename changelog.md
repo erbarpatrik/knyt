@@ -1,5 +1,28 @@
 # KNYT Changelog
 
+# V0.6.0 Beta
+
+- Supabase integráció.
+- `@supabase/supabase-js` kliens konfigurálása.
+- `.env` támogatás Supabase URL és anon kulcs számára.
+- Központi `lib/supabase.js` kliens létrehozása.
+- PostgreSQL `reports` tábla létrehozása.
+- Row Level Security (RLS) engedélyezése.
+- Anonymous `INSERT` policy.
+- Anonymous `SELECT` policy.
+- `loadReports()` függvény a bejelentések adatbázisból történő betöltéséhez.
+
+- A bejelentések mentése statikus tömb helyett Supabase adatbázisba történik.
+- A térkép induláskor már a Supabase adatbázisból tölti be a bejelentéseket.
+- Adatbázis rekordok konvertálása a frontend által használt `report` objektummá marker létrehozás előtt.
+- A `reportForm` submit esemény aszinkron (`async`) működésre lett átállítva.
+- Supabase kapcsolat ellenőrzése.
+- INSERT hibakezelés hozzáadása.
+- SELECT jogosultság hiánya miatti üres lekérdezés javítása.
+- A `reports.js` statikus adatforrás kiváltásra került.
+- A `reports.forEach(addReportMarker);` hívás eltávolítva.
+
+
 ## v0.5.5 Beta
 
 - Toast értesítési rendszer bevezetése

@@ -305,8 +305,8 @@ if (error) {
 
   const submitMessage = document.getElementById("submit-message");
 
-submitMessage.textContent =
-  `✅ A bejelentés sikeresen rögzítésre került. Azonosító: ${report.id}`;
+  submitMessage.textContent =
+  "✅ A bejelentés sikeresen rögzítésre került, és megjelent a KNYT térképén.";
 
 submitMessage.classList.add("show");
 
