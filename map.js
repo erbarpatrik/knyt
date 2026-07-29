@@ -97,6 +97,7 @@ async function loadReports() {
   }
 
   data.forEach(dbReport => {
+    const formatted = formatDateTime(dbReport.created_at);
     addReportMarker({
       id: dbReport.id,
   
@@ -109,13 +110,29 @@ async function loadReports() {
       postcode: dbReport.postcode,
       county: dbReport.county,
   
-      date: dbReport.created_at,
-      time: "",
+      date: formatted.date,
+time: formatted.time,
   
       note: dbReport.description,
       status: dbReport.status
     });
   });
+}
+function formatDateTime(timestamp) {
+  const date = new Date(timestamp);
+
+  return {
+    date: new Intl.DateTimeFormat("hu-HU", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(date),
+
+    time: new Intl.DateTimeFormat("hu-HU", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(date),
+  };
 }
 
 loadReports();
