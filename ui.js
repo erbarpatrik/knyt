@@ -41,7 +41,7 @@ document.querySelector('#app').innerHTML = `
 
   <div id="countdown"></div>
 
-  <small>KNYT v0.6.0 Beta</small>
+  <small>KNYT v0.6.1 Beta</small>
 
 </div>
 
