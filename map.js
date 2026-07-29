@@ -74,7 +74,7 @@ function addReportMarker(report) {
   ).addTo(map);
 
   marker.bindPopup(`
-    <strong>${report.id}</strong><br>
+    <strong>${report.reportNumber ?? report.id}</strong><br>
 
     📍 ${report.city ?? "-"}<br>
     ${report.postcode ?? "-"} ${report.street ?? "-"}${report.houseNumber ? " " + report.houseNumber : ""}<br>
@@ -100,6 +100,7 @@ async function loadReports() {
     const formatted = formatDateTime(dbReport.created_at);
     addReportMarker({
       id: dbReport.id,
+      reportNumber: dbReport.report_number,
   
       lat: dbReport.latitude,
       lng: dbReport.longitude,
@@ -136,6 +137,49 @@ function formatDateTime(timestamp) {
 }
 
 loadReports();
+
+supabase
+  .channel("reports")
+  .on(
+    "postgres_changes",
+    {
+      event: "INSERT",
+      schema: "public",
+      table: "reports",
+    },
+    (payload) => {
+      console.log("Új bejelentés érkezett:", payload);
+    
+      const dbReport = payload.new;
+    
+      const formatted = formatDateTime(dbReport.created_at);
+    
+      addReportMarker({
+        id: dbReport.id,
+        reportNumber: dbReport.report_number,
+    
+        lat: dbReport.latitude,
+        lng: dbReport.longitude,
+    
+        city: dbReport.city,
+        street: dbReport.road,
+        houseNumber: dbReport.house_number,
+        postcode: dbReport.postcode,
+        county: dbReport.county,
+    
+        date: formatted.date,
+        time: formatted.time,
+    
+        note: dbReport.description,
+        status: dbReport.status,
+      });
+    }
+    
+  )
+  .subscribe((status) => {
+    console.log("Realtime státusz:", status);
+  });
+
 
 // Ideiglenes bejelentési marker
 let temporaryMarker = null;
@@ -322,14 +366,7 @@ if (error) {
 
   const submitMessage = document.getElementById("submit-message");
 
-  submitMessage.textContent =
-  "✅ A bejelentés sikeresen rögzítésre került, és megjelent a KNYT térképén.";
-
-submitMessage.classList.add("show");
-
-setTimeout(() => {
-  submitMessage.classList.remove("show");
-}, 4000);
+  showToast("✅ A bejelentés sikeresen rögzítésre került, és megjelent a KNYT térképén.");
 
   console.log(report);
 });
