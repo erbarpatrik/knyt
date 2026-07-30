@@ -3,17 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KNYT Admin Dashboard</title>
+    <title>KNYT Admin</title>
+
+    <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
 
-<h1>KNYT Admin Dashboard</h1>
+<header class="admin-header">
+    <h1>KNYT Admin</h1>
+
+    <button id="logout">Kijelentkezés</button>
+</header>
 
 <p id="welcome">Betöltés...</p>
 
-<button id="logout">
-    Kijelentkezés
-</button>
+<hr>
+
+<h2>Bejelentések</h2>
+
+<table id="reports-table">
+    <thead>
+        <tr>
+            <th>Dátum</th>
+            <th>Település</th>
+            <th>Típus</th>
+            <th>Állapot</th>
+            <th>Művelet</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+</table>
 
 <script type="module" src="/admin/dashboard.js"></script>
 

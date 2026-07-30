@@ -1,5 +1,14 @@
 # KNYT Changelog
 
+v0.7.0
+
+- Admin jogosultságok (RLS) véglegesítése
+- INSERT policy hozzáadva authenticated felhasználóknak
+- Reports tábla SQL alapú újralétrehozása
+- Jogosultságok és policy-k tisztítása
+- Admin és nyilvános bejelentések egyaránt működnek
+- RLS és Supabase konfiguráció validálva
+
 ## v0.6.1
 
 - Supabase Realtime integráció

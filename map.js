@@ -313,25 +313,35 @@ reportForm.addEventListener("submit", async (e) => {
   
     status: "pending"
   };
+  const payload = {
+    report_type: report.type,
+    status: report.status,
+  
+    latitude: report.lat,
+    longitude: report.lng,
+  
+    city: report.city,
+    postcode: report.postcode,
+    county: report.county,
+    road: report.street,
+    house_number: report.houseNumber,
+  
+    description: report.note
+  };
+  
+  console.log("INSERT payload:", payload);
+  
   const { error } = await supabase
   .from("reports")
-  .insert([
-    {
-      report_type: report.type,
-      status: report.status,
+  .insert([payload]);
 
-      latitude: report.lat,
-      longitude: report.lng,
-
-      city: report.city,
-      postcode: report.postcode,
-      county: report.county,
-      road: report.street,
-      house_number: report.houseNumber,
-
-      description: report.note
-    }
-  ]);
+console.log("INSERT error:", error);
+  
+  if (error) {
+    console.error(error);
+    alert(error.message);
+    return;
+  }
 
 if (error) {
   console.error(error);
