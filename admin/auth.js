@@ -18,6 +18,5 @@ form.addEventListener("submit", async (e) => {
     message.textContent = error.message;
     return;
   }
-
-  message.textContent = "Sikeres bejelentkezés!";
+  window.location.href = "/dashboard.html";
 });
