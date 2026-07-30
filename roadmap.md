@@ -33,7 +33,9 @@ Határidő: 2026.08.01.
 - [ ] Bejelentések betöltése induláskor
 - [ ] `reports.js` kiváltása
 - [ ] CRUD műveletek
-- [ ] Jogosultságkezelés
+- [ ] - KNYT azonosító (`KNYT-YYYY-XXXXXX`) automatikus generálása.
+- `created_at` formázása magyar dátum/idő formátumra.
+- Valós idejű (Realtime) szinkronizáció.
 
 
 
@@ -45,11 +47,10 @@ Határidő: 2026.08.01.
 - [ ] UI finomítások
 - [ ] Hibakezelések
 - `reports.push(report)` eltávolítása.
-- KNYT azonosító (`KNYT-YYYY-XXXXXX`) automatikus generálása.
-- `created_at` formázása magyar dátum/idő formátumra.
+
 - Admin státuszkezelés.
 - Fotófeltöltés Supabase Storage használatával.
-- Valós idejű (Realtime) szinkronizáció.
+
 
 
 ## v0.8.x – Admin felület

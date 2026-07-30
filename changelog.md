@@ -1,5 +1,15 @@
 # KNYT Changelog
 
+## v0.6.1
+
+- Supabase Realtime integráció
+- Valós idejű marker megjelenítés új bejelentéseknél
+- Automatikus KNYT azonosító (`report_number`) generálása adatbázis oldalon
+- KNYT azonosító megjelenítése a marker popupban
+- Magyar dátum- és időformátum a bejelentéseknél
+- Bejelentés visszajelzés átalakítása `showToast()` használatára
+- Kisebb hibajavítások és kódtisztítás
+
 # V0.6.0 Beta
 
 - Supabase integráció.
