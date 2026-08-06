@@ -24,34 +24,32 @@ createUI();
 
 const countdown = document.getElementById("countdown");
 
-// KNYT indulása
-const launchDate = new Date("2026-08-01T00:00:00");
+const launchDate = new Date("2026-10-01T00:00:00");
 
 function updateCountdown() {
+    const now = new Date();
+    const difference = launchDate - now;
 
-  const now = new Date();
-  const difference = launchDate - now;
+    if (difference <= 0) {
+        clearInterval(timer);
+        countdown.innerHTML = "A KNYT elindult!";
+        return;
+    }
 
-  if (difference <= 0) {
-    countdown.innerHTML = "<strong>A KNYT elindult!</strong>";
-    return;
-  }
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((difference / (1000 * 60)) % 60);
+    const seconds = Math.floor((difference / 1000) % 60);
 
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((difference / (1000 * 60)) % 60);
-  const seconds = Math.floor((difference / 1000) % 60);
-
-  countdown.innerHTML = `
-    <p><strong>A rendszer élesítéséig:</strong></p>
-    <p>${days} nap ${hours} óra ${minutes} perc ${seconds} mp</p>
-`;
+    countdown.innerHTML = `
+        <p><strong>A rendszer élesítéséig:</strong></p>
+        <p>${days} nap ${hours} óra ${minutes} perc ${seconds} mp</p>
+    `;
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
-updateCountdown();
-setInterval(updateCountdown, 1000);
+const timer = setInterval(updateCountdown, 1000);
+
 
 initMap(reports);
 console.log('Supabase kapcsolat:', supabase)
